@@ -18,8 +18,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -88,16 +88,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         this.infoButton2 = (Button)infoWindow.findViewById(R.id.button2);
 
         addPlacesFromServer();
-        searchBar.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        searchBar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String nazwa = adapterView.getItemAtPosition(i).toString();
                 locateBar(nazwa);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
             }
         });
         getLocationPermission();
@@ -170,7 +165,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     private void initSearch(){
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        hideSoftKeyboard();
         mapWrapperLayout = (MapWrapperLayout)findViewById(R.id.map_relative_layout);
         mapWrapperLayout.init(mMap, getPixelsFromDp(this, 39 + 20));
 
@@ -242,11 +237,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        hideSoftKeyboard();
     }
 
     private boolean locateBar(String nazwaBaru) {
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        hideSoftKeyboard();
         Log.d(TAG, "locateBar:begin=EditText: action");
 
         Log.d(TAG,"Nazwa Baru: "+nazwaBaru);
@@ -306,7 +301,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private void moveCamera(LatLng latLng, float zoom){
         Log.d(TAG, "moveCamera: begin");
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);    }
+        hideSoftKeyboard();
+    }
 
     public void findMeFcn(View view) {
         getDeviceLocation();
@@ -335,6 +331,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             return false;
         }
         return true;
+    }
+
+    private void hideSoftKeyboard() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(searchBar.getWindowToken(), 0);
     }
 
     private void getLocationPermission(){
