@@ -42,10 +42,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ReservationActivity"
-            android:label="@string/bar_name"
-            android:theme="@style/SecondTheme">
-
-        </activity>
+            android:label="@string/bar_name"></activity>
     </application>
 
 </manifest>

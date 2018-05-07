@@ -8,7 +8,7 @@
         android:title="Zaloguj"
         android:visible="true"
         android:orderInCategory="2" />
-    <item android:id="@+id/informacje_menu"
+    <item android:id="@+id/info_menu"
         android:title="Informacje"
         android:visible="true"
         android:orderInCategory="3" />

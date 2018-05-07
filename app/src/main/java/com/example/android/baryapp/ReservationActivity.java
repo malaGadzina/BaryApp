@@ -48,8 +48,8 @@ public class ReservationActivity extends AppCompatActivity {
         adres = findViewById(R.id.address_txt);
 
         final Calendar c = Calendar.getInstance();
-        int h = c.HOUR_OF_DAY;
-        int m = c.MINUTE+30;
+        int h =c.get(Calendar.HOUR_OF_DAY);
+        int m = c.get(Calendar.MINUTE)+30;
         if (m>59){
             h++;
             m = m-60;
@@ -63,7 +63,7 @@ public class ReservationActivity extends AppCompatActivity {
         liczbaLudzi.setText("2");
         miasto.setText(miejsce.getCity());
         adres.setText(miejsce.getAddress());
-        getActionBar().setTitle(miejsce.getName());
+        this.getSupportActionBar().setTitle(miejsce.getName());
 
     }
     public void hourFun(View view) {
@@ -73,16 +73,27 @@ public class ReservationActivity extends AppCompatActivity {
 
     public void minusFun(View view) {
         liczba--;
-        liczbaLudzi.setText(liczba);
+        if (liczba<1){
+            liczba++;
+        }
+        liczbaLudzi.setText(" "+liczba+" ");
     }
 
     public void plusFun(View view) {
         liczba++;
-        liczbaLudzi.setText(liczba);
+        if (liczba>12)
+            liczba--;
+        liczbaLudzi.setText((" "+liczba+" "));
     }
 
     public void rezerwujFun(View view) {
         //TODO: rezerwacje
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
         finish();
     }
 }
