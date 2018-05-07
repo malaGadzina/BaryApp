@@ -83,5 +83,6 @@ public class ReservationActivity extends AppCompatActivity {
 
     public void rezerwujFun(View view) {
         //TODO: rezerwacje
+        finish();
     }
 }

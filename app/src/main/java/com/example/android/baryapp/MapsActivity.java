@@ -14,6 +14,8 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -99,6 +101,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
         getLocationPermission();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.ustawienia_menu:
+                Toast.makeText(getApplicationContext(),"Ustawienia", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.login_menu:
+                Toast.makeText(getApplicationContext(),"Login", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.info_menu:
+                Toast.makeText(getApplicationContext(),"Informacje", Toast.LENGTH_SHORT).show();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

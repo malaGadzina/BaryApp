@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/ustawienia_menu"
+    android:title="Ustawienia"
+    android:visible="true"
+    android:orderInCategory="1" />
+    <item android:id="@+id/login_menu"
+        android:title="Zaloguj"
+        android:visible="true"
+        android:orderInCategory="2" />
+    <item android:id="@+id/informacje_menu"
+        android:title="Informacje"
+        android:visible="true"
+        android:orderInCategory="3" />
+</menu>
